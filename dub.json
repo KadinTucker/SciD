@@ -1,0 +1,7 @@
+{
+	"name": "SciD",
+	"authors": [
+		"Kadin Tucker"
+	],
+	"description": "A library for the D language intended to make scientific calculation and plotting possible"
+}

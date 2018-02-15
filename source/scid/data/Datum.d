@@ -66,6 +66,7 @@ class Datum(T) {
     this(T value, T uncertainty=0, Unit[char] units=null) {
         this.value = value;
         this.uncertainty = uncertainty;
+        this.units = units;
     }
 
     void addUnit(Unit unit) {

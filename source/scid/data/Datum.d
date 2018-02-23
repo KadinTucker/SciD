@@ -42,9 +42,12 @@ class Datum(T) {
 
     /**
      * Adds a datum to this one
-     * Fails if the data have differing units
+     * Fails if the data have differing units; returns this
      */
     Datum!T add(Datum!T other) {
+        if(this.units != other.units) {
+            return this;
+        }
         return new Datum!T(this.value + other.value, this.error + other.error);
     }
 
@@ -53,6 +56,9 @@ class Datum(T) {
      * Fails if the data have differing units
      */
     Datum!T subtract(Datum!T other) {
+        if(this.units != other.units) {
+            return this;
+        }
         return new Datum!T(this.value - other.value, this.error + other.error);
     }
 
@@ -61,7 +67,7 @@ class Datum(T) {
      */
     Datum!T multiply(Datum!T other) {
         Datum newDatum = new Datum!T(this.value * other.value, 
-                (this.error / this.value + other.error / other.value) * (this.value * other.value));
+                (this.error / this.value + other.error / other.value) * (this.value * other.value), other.units.dup);
         foreach(unit; this.units.values) {
             newDatum.addUnit(unit);
         }
@@ -73,7 +79,7 @@ class Datum(T) {
      */
     Datum!T divide(Datum!T other) {
         Datum newDatum = new Datum!T(this.value / other.value, 
-                (this.error / this.value + other.error / other.value) * (this.value / other.value));
+                (this.error / this.value + other.error / other.value) * (this.value / other.value), other.units.dup);
         foreach(unit; this.units.values) {
             newDatum.addUnit(unit);
         }

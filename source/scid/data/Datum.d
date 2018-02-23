@@ -60,14 +60,24 @@ class Datum(T) {
      * Multiplies two data
      */
     Datum!T multiply(Datum!T other) {
-        return new Datum!T(this.value * other.value, (this.error / this.value + other.error / other.value) * (this.value * other.value));
+        Datum newDatum = new Datum!T(this.value * other.value, 
+                (this.error / this.value + other.error / other.value) * (this.value * other.value));
+        foreach(unit; this.units.values) {
+            newDatum.addUnit(unit);
+        }
+        return newDatum;
     }
 
     /**
      * Divides this datum by another
      */
     Datum!T divide(Datum!T other) {
-        return new Datum!T(this.value / other.value, (this.error / this.value + other.error / other.value) * (this.value / other.value));
+        Datum newDatum = new Datum!T(this.value / other.value, 
+                (this.error / this.value + other.error / other.value) * (this.value / other.value));
+        foreach(unit; this.units.values) {
+            newDatum.addUnit(unit);
+        }
+        return newDatum;
     }
 
 }

@@ -1,5 +1,7 @@
 module scid.data.Unit;
 
+import std.algorithm;
+
 enum UnitPrefix {
     PICO = 0.000000000001,
     NANO = 0.000000001,
@@ -17,24 +19,47 @@ enum UnitPrefix {
 }
 
 enum UnitType {
-    GRAM = 'g',
-    METER = 'm',
-    LITER = 'L',
-    SECOND = 's',
-    NEWTON = 'N',
-    JOULE = 'J',
-    WATT = 'W',
-    KELVIN = 'K',
-    COULOMB = 'C',
-    VOLT = 'V',
-    AMPERE = 'A',
-    OHM = 'O'
+    GRAM = "g",
+    METER = "m",
+    LITER = "L",
+    SECOND = "s",
+    NEWTON = "N",
+    JOULE = "J",
+    WATT = "W",
+    KELVIN = "K",
+    COULOMB = "C",
+    VOLT = "V",
+    AMPERE = "A",
+    OHM = "\u03A9",
+    ATMOSPHERE = "atm",
+    TORR = "torr",
+    MMHG = "mmHg",
+    PASCAL = "Pa"
 }
 
+/**
+ * A structure denoting multiplicity and magnitude of a unit
+ */
 struct Unit {
 
-    char name; ///A character representing this unit
     UnitPrefix magnitude; ///The prefix which determines the unit's magnitude
     int power; ///The multiplicity of the unit
+
+}
+
+/**
+ * A class that represents a set of units
+ */
+class UnitSet {
+
+    Unit[UnitType] allUnits;
+
+    void addUnit(UnitType toAdd, int amount=1) {
+        if(allUnits.keys.canFind(toAdd)) {
+            allUnits[toAdd].power += amount;
+        } else {
+            allUnits[UnitType] = Unit(UnitPrefix.NONE, amount);
+        }
+    }
 
 }

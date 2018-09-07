@@ -12,7 +12,7 @@ class Datum(T) {
 
     private T value; ///The value of the datum
     private T uncertainty; ///The uncertainty, +/-, of the datum; always a positive value
-    private Unit[char] units; ///The units of this datum, multiplied together
+    private Unit[UnitType] units; ///The units of this datum, multiplied together
 
     alias value this;
 

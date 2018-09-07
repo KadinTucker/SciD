@@ -14,6 +14,7 @@ abstract class Plot {
     double lowerBound; ///The lower bound of the scale on the plot
     string xlabel; ///The label for the x axis of the plot
     string ylabel; ///The label for the y axis of the plot
+    string title; ///The title of the plot
 
     abstract void setBounds(); ///Sets the boundaries of the plot
     abstract void exportPlot(); ///Exports the graph to a bitmap image
@@ -61,8 +62,10 @@ class ScatterPlot : Plot {
     override void exportPlot() {
         SDL_Surface* surface = SDL_CreateRGBSurfaceWithFormat(0, 500,
                 400, 32, SDL_PIXELFORMAT_RGB332);
-        
         SDL_FillRect(surface, null, SDL_MapRGB(surface.format, cast(ubyte)255, cast(ubyte)255, cast(ubyte)255));
+        foreach(point; this.points) {
+            
+        }
         SDL_SaveBMP(surface, cast(char*)("scatterplot.bmp"));
     }
 

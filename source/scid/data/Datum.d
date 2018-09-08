@@ -7,6 +7,7 @@ import scid.data.Unit;
 /**
  * A piece of data
  * Includes uncertainty and allows for error propogation
+ * TODO: Implement operator overloads
  */
 class Datum(T) {
 
